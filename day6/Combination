@@ -1,0 +1,18 @@
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> list = new ArrayList<>();
+        solve(list, new ArrayList<>(), n, k, 1);
+        return list;
+    }
+    private void solve(List<List<Integer>> list, List<Integer> ans, int n, int k, int idx) {
+        if (ans.size() == k) {
+            list.add(new ArrayList<>(ans));
+            return;
+        }
+        if (idx > n) return;
+        solve(list, ans, n, k, idx + 1);
+        ans.add(idx);
+        solve(list, ans, n, k, idx + 1);
+        ans.remove(ans.size() - 1); 
+    }
+}
