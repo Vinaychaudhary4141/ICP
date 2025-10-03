@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(candidates); 
+        solve(candidates, target, list, new ArrayList<>(), 0, 0);
+        return list;
+    }
+    private void solve(int[] candidates, int target, List<List<Integer>> list, List<Integer> ans, int idx, int sum) {
+        if (sum == target) {
+            list.add(new ArrayList<>(ans));
+            return;
+        }
+        if (sum > target || idx >= candidates.length) {
+            return;
+        }
+        for (int i = idx; i < candidates.length; i++) {
+            if (i > idx && candidates[i] == candidates[i - 1]) continue;
+            ans.add(candidates[i]);
+            solve(candidates, target, list, ans, i + 1, sum + candidates[i]);
+            ans.remove(ans.size() - 1);
+        }
+    }
+}
