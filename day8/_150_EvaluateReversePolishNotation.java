@@ -1,9 +1,6 @@
-import java.util.*;
-
 public class _150_EvaluateReversePolishNotation {
     public int evalRPN(String[] tokens) {
         Stack<Integer> stack = new Stack<>();
-
         for (String token : tokens) {
             if (isOperator(token)) {
                 int b = stack.pop(); // second operand
@@ -14,14 +11,11 @@ public class _150_EvaluateReversePolishNotation {
                 stack.push(Integer.parseInt(token));
             }
         }
-
         return stack.pop();
     }
-
     private boolean isOperator(String token) {
         return "+-*/".contains(token);
     }
-
     private int applyOperator(int a, int b, String op) {
         switch (op) {
             case "+": return a + b;
